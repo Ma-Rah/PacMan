@@ -11,6 +11,8 @@ class Stage {
   constructor(width, height) {
     this.width = width;
     this.height = height;
+    this.elements = []
+    this.element = this._render()
   }
 
   _render() {
@@ -26,14 +28,18 @@ class Stage {
     this.element = this._render()
     parent.appendChild(this.element)
   }
+
+  //   collisionDetection(x, y) {
+  //     if ()
+  //   }
 }
 
 class Pacman {
-  constructor(xPos, yPos, mouth) {
+  constructor(xPos, yPos, parent) {
     this.pacMan = this.render();
     this.xPos = xPos;
     this.yPos = yPos;
-    this.mouth = mouth;
+    this.parent = parent;
   }
   render() {
     const pacElm = document.createElement('div');
@@ -83,6 +89,7 @@ class Pacman {
         this.update();
       }
     });
+
 
     return pacElm
   }
@@ -143,31 +150,44 @@ class Pacman {
 }
 
 class Entity {
-  constructor(entityX, entityY, entityType) {
-    this.entityX = entityX
-    this.entityX = entityX
-    this.entityType = entityType
+  constructor(x, y, parent, type) {
+    this.x = x
+    this.y = y
+    this.type = type
+    this.parent = parent
+    console.log(x, y)
+    console.log(this.parent)
+    console.log(this.render())
+    console.log(this.parent.element)
+    this.parent.element.appendChild(this.render())
   }
 
   render() {
-    const entityElem = document.createElement('div');
-    entityElem.className = 'entity__elem'; // add classes and delete innerHTML
+    console.log(this.type)
+    const entityWall = document.createElement('div');
+    entityWall.className = 'entity entity--wall'; // add classes and delete innerHTML
+    // this.entityX(Math.floor(Math.random) * newStage.width)
+    entityWall.style.left = this.x * TILE_SIZE + 'px';
+    entityWall.style.top = this.y * TILE_SIZE + 'px';
 
-    entityElem.style.width = TILE_SIZE + 'px';
-    entityElem.style.height = TILE_SIZE + 'px';
-
-    return entityElem;
+    this.parent.elements.push(this)
+    return entityWall;
   }
+
   mount(parent) {
     this.element = this.render()
     parent.appendChild(this.element)
   }
 }
-
-const pacman = new Pacman(0, 0, true);
 const newStage = new Stage(10, 10)
-const newEntity = new Entity(5, 5)
+const newEntity = new Entity(1, 1, newStage)
+const pacman = new Pacman(0, 0, newStage);
+const newEntityTwo = new Entity(4, 5, newStage)
+
+
+
 
 newStage.mount(document.querySelector(".container"));
 pacman.mount(document.querySelector(".stage"));
 newEntity.mount(document.querySelector(".stage"));
+newEntityTwo.mount(document.querySelector(".stage"));
