@@ -15,8 +15,10 @@ class Stage {
 
   _render() {
     const stageElem = document.createElement('div');
-    stageElem.innerHTML = `
-<div id="app" class="stage"></div>`
+    stageElem.className = 'stage'; // add classes and delete innerHTML
+
+    stageElem.style.width = this.width * TILE_SIZE + 'px';
+    stageElem.style.height = this.height * TILE_SIZE + 'px';
 
     return stageElem;
   }
@@ -26,30 +28,38 @@ class Stage {
   }
 }
 
-const target = document.querySelector('body')
-const newStage = new Stage()
-newStage.mount(target)
-
 class Pacman {
-  constructor(xPos, yPos, mouth, pacMan) {
-    this.pacMan = pacMan
+  constructor(xPos, yPos, mouth) {
+    this.pacMan = this.render();
     this.xPos = xPos;
     this.yPos = yPos;
     this.mouth = mouth;
   }
   render() {
     const pacElm = document.createElement('div');
-    pacElm.innerHTML = `
-    <div class="entity entity--pac pacboy-active-light"></div>
-    `
-    return pacElm;
+    pacElm.className = 'entity entity--pac pacboy-active-light'
 
-    //adding event listeners
+    // add event listeners
 
+    // Right arrow
+
+    document.addEventListener('keydown', (e) =>  { 
+      console.log('work')
+      if (e.keyCode === 39) {
+        console.log(e)
+        direction = 'right'
+        this.reset();
+        this.move();
+        this.update();
+    }
+  })
+
+      return pacElm
   }
   mount(parent) {
-    this.element = this.render();
-    parent.appendChild(this.element);
+    // this.element = this.render();
+    parent.appendChild(this.pacMan);
+
   }
   reset() {
     this.pacMan.classList.remove('pacman--right')
@@ -57,8 +67,6 @@ class Pacman {
     this.pacMan.classList.remove('pacman--down')
     this.pacMan.classList.remove('pacman--up')
   }
-
-
   move() {
     if (direction === 'right') {
       this.xPos++
@@ -79,6 +87,8 @@ class Pacman {
   update() {
     this.pacMan.classList.toggle('pacman--closed')
     if (direction === 'right' || direction === 'left') {
+      console.log('hello')
+      console.log(this.xPos * TILE_SIZE + 'px')
       this.pacMan.style.left = this.xPos * TILE_SIZE + 'px';
     } else if (direction === 'up' || direction === 'down') {
       this.pacMan.style.top = this.yPos * TILE_SIZE + 'px';
@@ -88,43 +98,40 @@ class Pacman {
   }
 }
 
-const pacman = new Pacman(0, 0, true, pacMan);
-pacman.mount(document.querySelector("#app"));
+const pacman = new Pacman(0, 0, true);
+const newStage = new Stage(3,3)
 
-// Right arrow
-document.addEventListener('keydown', (e) => {
-  if (e.keyCode === 39) {
-    console.log(e)
-    direction = 'right'
-    pacman.reset();
-    pacman.move();
-    pacman.update();
-  }
-});
+newStage.mount(document.querySelector(".container"));
+pacman.mount(document.querySelector(".stage"));
+
+
+
+
+
 // Left Arrow
-document.addEventListener('keydown', (e) => {
-  if (e.keyCode === 37) {
-    console.log(e)
-    direction = 'left'
-    pacman.move();
-    pacman.update();
-  }
-});
+// document.addEventListener('keydown', (e) => {
+//   if (e.keyCode === 37) {
+//     console.log(e)
+//     direction = 'left'
+//     pacman.move();
+//     pacman.update();
+//   }
+// });
 
-//  down arrow
-document.addEventListener('keydown', (e) => {
-  if (e.keyCode === 40) {
-    direction = 'down'
-    pacman.move();
-    pacman.update();
-  }
-});
+// //  down arrow
+// document.addEventListener('keydown', (e) => {
+//   if (e.keyCode === 40) {
+//     direction = 'down'
+//     pacman.move();
+//     pacman.update();
+//   }
+// });
 
-// up arrow
-document.addEventListener('keydown', (e) => {
-  if (e.keyCode === 38) {
-    direction = 'up'
-    pacman.move();
-    pacman.update();
-  }
-});
+// // up arrow
+// document.addEventListener('keydown', (e) => {
+//   if (e.keyCode === 38) {
+//     direction = 'up'
+//     pacman.move();
+//     pacman.update();
+//   }
+// });
