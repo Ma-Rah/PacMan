@@ -7,6 +7,32 @@ let xpos = 0;
 let ypos = 0;
 const TILE_SIZE = 85;
 
+class Pacman { 
+  constructor(xPos, yPos, mouth, pacMan) { 
+    this.pacMan = pacMan;
+    this.xPos = xPos;
+    this.yPos = yPos;
+    this.mouth = mouth;
+  }
+  moveRight() { 
+    this.xPos++
+  }
+  updateX() { 
+    this.pacMan.style.left = this.xPos*TILE_SIZE + 'px';
+    // this.mouth();
+    // console.log(mouth);
+  }
+  // mouth() { 
+  //   if (this.mouth === true) { 
+  //     this.mouth = false;
+  //     // this.pacman.classList.toggle('pacman--closed')
+  //   } else { 
+  //     this.mouth = true
+  //   }
+  // }
+}
+
+const pacman = new Pacman(0, 0, true, pacMan);
 
 // Toggle between open and closed mouth
 
@@ -14,8 +40,8 @@ const TILE_SIZE = 85;
 document.addEventListener('keydown', (e) => {
   if (e.keyCode === 39) {
     console.log(e)
-    xpos++
-    pacMan.style.left = (xpos*TILE_SIZE) + 'px';
+    pacman.moveRight();
+    pacman.updateX();
     pacMan.classList.add('pacman--right')
     pacMan.classList.toggle('pacman--closed')
   } else {
