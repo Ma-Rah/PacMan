@@ -3,6 +3,10 @@
 console.log('it works!');
 const pacMan = document.querySelector('.entity--pac')
 
+let xpos = 0; 
+let ypos = 0;
+const TILE_SIZE = 85;
+
 
 // Toggle between open and closed mouth
 
@@ -10,6 +14,8 @@ const pacMan = document.querySelector('.entity--pac')
 document.addEventListener('keydown', (e) => {
   if (e.keyCode === 39) {
     console.log(e)
+    xpos++
+    pacMan.style.left = (xpos*TILE_SIZE) + 'px';
     pacMan.classList.add('pacman--right')
     pacMan.classList.toggle('pacman--closed')
   } else {
@@ -20,6 +26,8 @@ document.addEventListener('keydown', (e) => {
 document.addEventListener('keydown', (e) => {
   if (e.keyCode === 37) {
     console.log(e)
+    xpos--
+    pacMan.style.left = (xpos*TILE_SIZE) + 'px';
     pacMan.classList.add('pacman--left')
     pacMan.classList.toggle('pacman--closed')
 
@@ -32,6 +40,8 @@ document.addEventListener('keydown', (e) => {
 document.addEventListener('keydown', (e) => {
   if (e.keyCode === 40) {
     console.log(e)
+    ypos++
+    pacMan.style.top = (ypos*TILE_SIZE) + 'px';
     pacMan.classList.add('pacman--down')
     pacMan.classList.toggle('pacman--closed')
   } else {
@@ -43,6 +53,8 @@ document.addEventListener('keydown', (e) => {
 document.addEventListener('keydown', (e) => {
   if (e.keyCode === 38) {
     console.log(e)
+    ypos--
+    pacMan.style.top = (ypos*TILE_SIZE) + 'px';
     pacMan.classList.add('pacman--up')
     pacMan.classList.toggle('pacman--closed')
 
