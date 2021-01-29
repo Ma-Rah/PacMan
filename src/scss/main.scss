@@ -36,7 +36,8 @@ body {
     font-weight: bold;
     text-align: center;
     padding-top: 65px;
-    user-select: none;    
+    user-select: none;
+    padding: 0;
   }
 
   &--wall {
@@ -59,6 +60,7 @@ body {
 .pacboy {
   &-active-light {
     background-image: url('/img/pacboy-active-light.png');
+    background-position-y: 10px;
   }
 
   &-active-medium {
@@ -82,4 +84,28 @@ body {
   &-active-dark {
     background-image: url('/img/pacgirl-active-dark.png');
   }
+}
+
+// .pacman--open {
+//   background-position-x: left;
+// }
+
+.pacman--closed {
+  background-position-x: right;
+}
+
+.pacman--right {
+  background-position-y: 10px;
+}
+
+.pacman--left {
+  background-position-y: -70px;
+}
+
+.pacman--down {
+  background-position-y: -150px;
+}
+
+.pacman--up {
+  background-position-y: -240px;
 }
