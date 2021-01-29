@@ -1,15 +1,25 @@
 'use strict';
 
+
 console.log('it works!');
 const pacMan = document.querySelector('.entity--pac')
 
+class Pacman {
+  constructor
+}
 
-// Toggle between open and closed mouth
+// console.log()
+let xpos = 0
+let ypos = 0
+const TILE_SIZE = 85
+
+// Toggle direction
 
 // Right arrow
 document.addEventListener('keydown', (e) => {
   if (e.keyCode === 39) {
-    console.log(e)
+    xpos++
+    pacMan.style.left = (xpos * TILE_SIZE) + 'px';
     pacMan.classList.add('pacman--right')
     pacMan.classList.toggle('pacman--closed')
   } else {
@@ -19,10 +29,10 @@ document.addEventListener('keydown', (e) => {
 // Left Arrow
 document.addEventListener('keydown', (e) => {
   if (e.keyCode === 37) {
-    console.log(e)
+    xpos--
+    pacMan.style.left = (xpos * TILE_SIZE) + 'px';
     pacMan.classList.add('pacman--left')
     pacMan.classList.toggle('pacman--closed')
-
   } else {
     pacMan.classList.remove('pacman--left')
   }
@@ -31,7 +41,8 @@ document.addEventListener('keydown', (e) => {
 //  down arrow
 document.addEventListener('keydown', (e) => {
   if (e.keyCode === 40) {
-    console.log(e)
+    ypos++
+    pacMan.style.top = (ypos * TILE_SIZE) + 'px';
     pacMan.classList.add('pacman--down')
     pacMan.classList.toggle('pacman--closed')
   } else {
@@ -42,10 +53,10 @@ document.addEventListener('keydown', (e) => {
 // up arrow
 document.addEventListener('keydown', (e) => {
   if (e.keyCode === 38) {
-    console.log(e)
+    ypos++
+    pacMan.style.top = (ypos * TILE_SIZE) + 'px';
     pacMan.classList.add('pacman--up')
     pacMan.classList.toggle('pacman--closed')
-
   } else {
     pacMan.classList.remove('pacman--up')
   }
