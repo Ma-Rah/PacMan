@@ -24,6 +24,7 @@ body {
   height: 510px;
   background-image: url('/img/tile.png');
   position: relative;
+  border: 1px solid black;
 }
 
 .entity {
@@ -32,6 +33,10 @@ body {
   height: 85px;
   // left: 0px;
   // top: 0px;
+
+  .entity__elem {
+    background-color: red;
+  }
 
   &--pac {
     position: absolute;

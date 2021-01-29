@@ -40,7 +40,6 @@ class Pacman {
     pacElm.className = 'entity entity--pac pacboy-active-light'
 
     // add event listeners
-
     // Right arrow
 
     document.addEventListener('keydown', (e) => {
@@ -143,8 +142,32 @@ class Pacman {
   }
 }
 
+class Entity {
+  constructor(entityX, entityY, entityType) {
+    this.entityX = entityX
+    this.entityX = entityX
+    this.entityType = entityType
+  }
+
+  render() {
+    const entityElem = document.createElement('div');
+    entityElem.className = 'entity__elem'; // add classes and delete innerHTML
+
+    entityElem.style.width = TILE_SIZE + 'px';
+    entityElem.style.height = TILE_SIZE + 'px';
+
+    return entityElem;
+  }
+  mount(parent) {
+    this.element = this.render()
+    parent.appendChild(this.element)
+  }
+}
+
 const pacman = new Pacman(0, 0, true);
 const newStage = new Stage(10, 10)
+const newEntity = new Entity(5, 5)
 
 newStage.mount(document.querySelector(".container"));
 pacman.mount(document.querySelector(".stage"));
+newEntity.mount(document.querySelector(".stage"));
