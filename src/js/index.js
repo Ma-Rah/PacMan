@@ -1,13 +1,34 @@
 'use strict';
 
-
-console.log('it works!');
 const pacMan = document.querySelector('.entity--pac')
-
+const container = document.querySelector('.container')
 
 let xpos = 0;
 let ypos = 0;
 const TILE_SIZE = 85;
+
+class Stage {
+  constructor(width, height) {
+    this.width = width;
+    this.height = height;
+  }
+
+  _render() {
+    const stageElem = document.createElement('div');
+    stageElem.innerHTML = `
+<div id="app" class="stage"></div>`
+
+    return stageElem;
+  }
+  mount(parent) {
+    this.element = this._render()
+    parent.appendChild(this.element)
+  }
+}
+
+const target = document.querySelector('body')
+const newStage = new Stage()
+newStage.mount(target)
 
 class Pacman {
   constructor(xPos, yPos, mouth, pacMan) {
@@ -16,13 +37,6 @@ class Pacman {
     this.yPos = yPos;
     this.mouth = mouth;
   }
-  // moveRight() {
-  //   this.xPos++
-  // }
-
-  // moveLeft() {
-  //   this.xPos--
-  // }
 
   move() {
     this.pacMan.classList.remove('pacman--right')
@@ -55,27 +69,10 @@ class Pacman {
     } else {
       console.log('notup')
     }
-    // this.mouth();
-    // console.log(mouth);
   }
-
-  // mouth() {
-  //   this.pacman.classList.toggle('pacman--closed')
-  // }
-
-  // mouth() { 
-  //   if (this.mouth === true) { 
-  //     this.mouth = false;
-  //     // this.pacman.classList.toggle('pacman--closed')
-  //   } else { 
-  //     this.mouth = true
-  //   }
-  // }
 }
 
 const pacman = new Pacman(0, 0, true, pacMan);
-
-
 
 // Toggle direction
 let direction = 'right'
@@ -86,8 +83,6 @@ document.addEventListener('keydown', (e) => {
     direction = 'right'
     pacman.move();
     pacman.update();
-  } else {
-    console.log('no animation')
   }
 });
 // Left Arrow
@@ -97,9 +92,6 @@ document.addEventListener('keydown', (e) => {
     direction = 'left'
     pacman.move();
     pacman.update();
-    console.log(direction)
-  } else {
-    console.log('no animation')
   }
 });
 
@@ -109,8 +101,6 @@ document.addEventListener('keydown', (e) => {
     direction = 'down'
     pacman.move();
     pacman.update();
-  } else {
-    console.log('no animation')
   }
 });
 
@@ -120,7 +110,5 @@ document.addEventListener('keydown', (e) => {
     direction = 'up'
     pacman.move();
     pacman.update();
-  } else {
-    console.log('no animation')
   }
 });
