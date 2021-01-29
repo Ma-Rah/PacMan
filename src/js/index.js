@@ -4,22 +4,45 @@
 console.log('it works!');
 const pacMan = document.querySelector('.entity--pac')
 
+let xpos = 0;
+let ypos = 0;
+const TILE_SIZE = 85;
+
 class Pacman {
-  constructor
+  constructor(xPos, yPos, mouth, pacMan) {
+    this.pacMan = pacMan;
+    this.xPos = xPos;
+    this.yPos = yPos;
+    this.mouth = mouth;
+  }
+  moveRight() {
+    this.xPos++
+  }
+  updateX() {
+    this.pacMan.style.left = this.xPos * TILE_SIZE + 'px';
+    // this.mouth();
+    // console.log(mouth);
+  }
+  // mouth() { 
+  //   if (this.mouth === true) { 
+  //     this.mouth = false;
+  //     // this.pacman.classList.toggle('pacman--closed')
+  //   } else { 
+  //     this.mouth = true
+  //   }
+  // }
 }
 
-// console.log()
-let xpos = 0
-let ypos = 0
-const TILE_SIZE = 85
+const pacman = new Pacman(0, 0, true, pacMan);
 
 // Toggle direction
 
 // Right arrow
 document.addEventListener('keydown', (e) => {
   if (e.keyCode === 39) {
-    xpos++
-    pacMan.style.left = (xpos * TILE_SIZE) + 'px';
+    console.log(e)
+    pacman.moveRight();
+    pacman.updateX();
     pacMan.classList.add('pacman--right')
     pacMan.classList.toggle('pacman--closed')
   } else {
@@ -29,6 +52,7 @@ document.addEventListener('keydown', (e) => {
 // Left Arrow
 document.addEventListener('keydown', (e) => {
   if (e.keyCode === 37) {
+    console.log(e)
     xpos--
     pacMan.style.left = (xpos * TILE_SIZE) + 'px';
     pacMan.classList.add('pacman--left')
@@ -41,6 +65,7 @@ document.addEventListener('keydown', (e) => {
 //  down arrow
 document.addEventListener('keydown', (e) => {
   if (e.keyCode === 40) {
+    console.log(e)
     ypos++
     pacMan.style.top = (ypos * TILE_SIZE) + 'px';
     pacMan.classList.add('pacman--down')
@@ -53,7 +78,8 @@ document.addEventListener('keydown', (e) => {
 // up arrow
 document.addEventListener('keydown', (e) => {
   if (e.keyCode === 38) {
-    ypos++
+    console.log(e)
+    ypos--
     pacMan.style.top = (ypos * TILE_SIZE) + 'px';
     pacMan.classList.add('pacman--up')
     pacMan.classList.toggle('pacman--closed')
